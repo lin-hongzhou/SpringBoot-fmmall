@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置⽣成器 -->
+<generatorConfiguration>
+    <!--执⾏generator插件⽣成⽂件的命令： call mvn mybatis-generator:generate -e -->
+    <!-- 引⼊配置⽂件 -->
+    <!--    <properties resource="generator.properties"/>-->
+    <!--classPathEntry:数据库的JDBC驱动,换成你⾃⼰的驱动位置可选 -->
+    <!--    <classPathEntry-->
+    <!--            location="D:\iflytek\maven\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"/>-->
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 配置 GeneralDAO -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.lhz.fmmall.general.GeneralDAO"/>
+        </plugin>
+
+        <!-- 配置数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/fmmall"
+                        userId="root"
+                        password="123456"/>
+
+        <!-- 配置 实体类 存放路径 -->
+        <javaModelGenerator targetPackage="com.lhz.fmmall.entity" targetProject="src/main/java"/>
+
+        <!-- 配置 xml 存放路径 -->
+        <sqlMapGenerator targetPackage="/" targetProject="src/main/resources/mappers"/>
+
+        <!-- 配置 DAO 存放路径 -->
+        <javaClientGenerator targetPackage="com.lhz.fmmall.dao" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <!-- 配置需要指定生成的数据库和表：% 代表所有表 -->
+        <table tableName="%">
+        </table>
+    </context>
+</generatorConfiguration>
